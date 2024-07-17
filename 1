@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#Create a Script to Backup All Your Work:
+
+echo "to create backup please provide below details"
+read -p "Enter source directory " sd
+read -p "Enter Target Directory " td
+timestamp=$(date '+%Y.%M.%D-%h.%m.%s')
+
+
+function create_backup {
+
+	backup_file="${td}/backup_${timestamp}"
+	echo "Backup_file created successfully $backup_file"
+
+	zip -r "${backup_file}.zip" "${sd}"
+	
+	if [ $? -eq 0 ]; then
+		echo "Backup created successfully"
+	else
+		echo "Backup Was not performed for $timestamp"
+	fi
+	
+}
+
+create_backup
